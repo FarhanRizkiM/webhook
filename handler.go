@@ -3,21 +3,22 @@ package webhook
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/aiteung/atapi"
-	"github.com/aiteung/atmessage"
-	"github.com/aiteung/module/model"
-	"github.com/whatsauth/wa"
 	"math/rand"
 	"net/http"
 	"os"
 	"strconv"
+
+	"github.com/aiteung/atapi"
+	"github.com/aiteung/atmessage"
+	"github.com/aiteung/module/model"
+	"github.com/whatsauth/wa"
 )
 
 func PostBalasan(w http.ResponseWriter, r *http.Request) {
 	var msg model.IteungMessage
 	var resp atmessage.Response
 	json.NewDecoder(r.Body).Decode(&msg)
-	link := "https://medium.com/@imyharis/cara-menggunakan-whatsauth-free-2fa-otp-notif-whatsapp-gateway-api-gratis-3e89dea56a21"
+	link := "https://medium.com/@farhanrizki101010/tutorial-cara-mengintegrasikan-whatsauth-free-2fa-otp-notif-whatsapp-gateway-api-gratis-3e0504f697e9"
 	if r.Header.Get("Secret") == os.Getenv("SECRET") {
 		if msg.Message == "loc" || msg.Message == "Loc" || msg.Message == "lokasi" || msg.LiveLoc {
 			location, err := ReverseGeocode(msg.Latitude, msg.Longitude)
@@ -36,11 +37,11 @@ func PostBalasan(w http.ResponseWriter, r *http.Request) {
 			}
 			resp, _ = atapi.PostStructWithToken[atmessage.Response]("Token", os.Getenv("TOKEN"), dt, "https://api.wa.my.id/api/send/message/text")
 
-		} else if msg.Message == "Babi" || msg.Message == "Anjing" || msg.Message == "goblok" {
+		} else if msg.Message == "Babi" || msg.Message == "Anjing" || msg.Message == "Goblok" || msg.Message == "Tolol" {
 			dt := &wa.TextMessage{
 				To:       msg.Phone_number,
 				IsGroup:  false,
-				Messages: fmt.Sprintf("Ihh %s kamu kok kasar bangett sihh, aku jadi takut tauuu", msg.Alias_name),
+				Messages: fmt.Sprintf("Ihh please dongg %s kamu kok kasar bangett sihh ke akuu, akuu jadi takut tauuu", msg.Alias_name),
 			}
 			resp, _ = atapi.PostStructWithToken[atmessage.Response]("Token", os.Getenv("TOKEN"), dt, "https://api.wa.my.id/api/send/message/text")
 
@@ -48,17 +49,29 @@ func PostBalasan(w http.ResponseWriter, r *http.Request) {
 			dt := &wa.TextMessage{
 				To:       msg.Phone_number,
 				IsGroup:  false,
-				Messages: fmt.Sprintf("makasiihh kakak %s kamu jugaa cakep kooo", msg.Alias_name),
+				Messages: fmt.Sprintf("makasiihh %s kamu jugaa cakep kooo", msg.Alias_name),
+			}
+			resp, _ = atapi.PostStructWithToken[atmessage.Response]("Token", os.Getenv("TOKEN"), dt, "https://api.wa.my.id/api/send/message/text")
+
+		} else if msg.Message == "Oni" || msg.Message == "Agung" || msg.Message == "Yudi" || msg.Message == "Wawan" || msg.Message == "Agus" || msg.Message == "Musa" || msg.Message == "Kamir" || msg.Message == "Yess" || msg.Message == "Edi" {
+			dt := &wa.TextMessage{
+				To:       msg.Phone_number,
+				IsGroup:  false,
+				Messages: fmt.Sprintf("ihhh please %s kamu jangan ngomong gituu bisi di teang ku barudak AE", msg.Alias_name),
 			}
 			resp, _ = atapi.PostStructWithToken[atmessage.Response]("Token", os.Getenv("TOKEN"), dt, "https://api.wa.my.id/api/send/message/text")
 
 		} else {
 			randm := []string{
-				"Anyong Aseoo Yeoboo " + msg.Alias_name + "\n Rizki lagi gaadaa \n aku H A N S Dev Bot salam kenall yaaaa, Sarangheo <3 \n Cara penggunaan WhatsAuth ada di link berikut ini ya kak...\n" + link,
+				"Maaf yaa" + msg.Alias_name + "\n Rizki Kasep lagi gaadaa \n aku H A N S Dev Bot salam kenall yaaaa \n Cara penggunaan WhatsAuth ada di link berikut ini ya kak...\n" + link,
 				"ihh jangan SPAM DOng berisik tau aku lagi dijalan nih",
 				"Kamu ganteng tau",
 				"Ihhh kamu cantik banget",
 				"Senja memang indah tapi kamu tetap yang terindah Aseek",
+				"Tes jugaa masuk masuk",
+				"Perkenalkan saya H A N S Dev BOT",
+				"Halooo",
+				"Aku adalah Yin dan tidak akan berubah apapun yang terjadi",
 			}
 			dt := &wa.TextMessage{
 				To:       msg.Phone_number,

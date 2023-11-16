@@ -9,5 +9,5 @@ var stringreply = []string{
 	"Kamu ganteng tau",
 	"Ihhh kamu cantik banget",
 	"Senja memang indah tapi kamu tetap yang terindah Aseek",
-	"Anyong Aseoo Yeoboo, Aiigoo Haris lagi gaadaa",
+	"Anyong Aseoo Yeoboo, Aiigoo Rizki lagi gaadaa",
 }
